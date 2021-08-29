@@ -3,7 +3,8 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-import tensorflow as tf  # noqa: E402
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()  # noqa: E402
 
 from superpoint.settings import EXPER_PATH  # noqa: E402
 

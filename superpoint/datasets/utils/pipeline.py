@@ -1,4 +1,6 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+import tensorflow_addons as tfa
 import cv2 as cv
 import numpy as np
 
@@ -41,7 +43,7 @@ def homographic_augmentation(data, add_homography=False, **config):
     with tf.name_scope('homographic_augmentation'):
         image_shape = tf.shape(data['image'])[:2]
         homography = sample_homography(image_shape, **config['params'])[0]
-        warped_image = tf.contrib.image.transform(
+        warped_image = tfa.image.transform(
                 data['image'], homography, interpolation='BILINEAR')
         valid_mask = compute_valid_mask(image_shape, homography,
                                         config['valid_border_margin'])

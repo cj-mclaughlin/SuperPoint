@@ -13,7 +13,8 @@ from superpoint.settings import EXPER_PATH
 
 logging.basicConfig(format='[%(asctime)s %(levelname)s] %(message)s',
                     datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
-import tensorflow as tf  # noqa: E402
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()  # noqa: E402
 
 
 def train(config, n_iter, output_dir, pretrained_dir=None,
@@ -65,7 +66,7 @@ def get_num_gpus():
 @contextmanager
 def _init_graph(config, with_dataset=False):
     set_seed(config.get('seed', int.from_bytes(os.urandom(4), byteorder='big')))
-    n_gpus = get_num_gpus()
+    n_gpus = 1 #get_num_gpus()
     logging.info('Number of GPUs detected: {}'.format(n_gpus))
 
     dataset = get_dataset(config['data']['name'])(**config['data'])

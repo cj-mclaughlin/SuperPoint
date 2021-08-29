@@ -1,4 +1,5 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from tensorflow import layers as tfl
 
 
@@ -6,7 +7,7 @@ def vgg_block(inputs, filters, kernel_size, name, data_format, training=False,
               batch_normalization=True, kernel_reg=0., **params):
     with tf.variable_scope(name, reuse=tf.AUTO_REUSE):
         x = tfl.conv2d(inputs, filters, kernel_size, name='conv',
-                       kernel_regularizer=tf.contrib.layers.l2_regularizer(kernel_reg),
+                    #    kernel_regularizer=tf.contrib.layers.l2_regularizer(kernel_reg),
                        data_format=data_format, **params)
         if batch_normalization:
             x = tfl.batch_normalization(

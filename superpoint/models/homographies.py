@@ -1,5 +1,6 @@
-import tensorflow as tf
-from tensorflow.contrib.image import transform as H_transform
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+from tensorflow_addons.image import transform as H_transform
 from math import pi
 import cv2 as cv
 
